@@ -1,8 +1,10 @@
 import pandas as pd
 
+### Import data and classification edits
 df = pd.read_csv('test1.csv', encoding='latin1')
 df_fixes = pd.read_csv('ClassificationFixes.csv', encoding='latin1')
 
+### Check each edit instance and implement the new classification and source data
 for i in range(len(df_fixes)):
     Id = df_fixes['BvDID Number'].iloc[i]
     Year = df_fixes['Year'].iloc[0]
@@ -18,4 +20,5 @@ for i in range(len(df_fixes)):
     df.loc[(df['BvDIDnumber'] == Id) & (df['year'] == Year), 'Source'] = Source
     df.loc[(df['BvDIDnumber'] == Id) & (df['year'] == Year), 'Comment'] = Comment
 
+### Export Data
 df.to_csv('FixedClassifications.csv', columns = ['BvDIDnumber', 'year', 'Founder Name', 'ICF', 'FFF', 'Source', 'Comment'], encoding = 'latin1')   
